@@ -50,6 +50,14 @@ Thank you for your interest in contributing to Monochrome! This guide will help 
     npm run dev
     ```
 
+#### Desktop Development (Tauri)
+
+To run the app natively as a desktop application, ensure you have the [Rust toolchain](https://rustup.rs/) and your platform's native C++ Build Tools installed, then run:
+
+```bash
+npx tauri dev
+```
+
 5. Open your browser:
    Navigate to `http://localhost:5173/`
 
@@ -322,10 +330,14 @@ Hash routing is used to ensure compatibility across all hosting platforms.
 If you need to deploy manually:
 
 ```bash
-# Build for production
+# Build for production (Web/PWA)
 bun run build
 
-# The `dist/` folder contains the deployable files
+# Build for production (Native Desktop)
+npx tauri build
+
+# The `dist/` folder contains the deployable Web files
+# The `src-tauri/target/release/bundle/` folder contains the Desktop installer
 ```
 
 ---
