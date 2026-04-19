@@ -87,6 +87,11 @@ export class Player {
 
         const player = new Player(audioElement, api, quality);
         await player.init();
+        if (typeof window !== 'undefined' && window.__TAURI_INTERNALS__) {
+            import('./tauri-bridge.js').then(({ initTauriBridge }) => {
+                initTauriBridge(player);
+            }).catch(e => console.error('Failed to load tauri bridge:', e));
+        }
         Player.#instance = player;
         return player;
     }

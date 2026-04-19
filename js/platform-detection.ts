@@ -18,3 +18,6 @@ export const isSafari =
 
 /** If the browser is Chrome. */
 export const isChrome = lowerCaseOriginalUserAgent.includes('chrome') || lowerCaseOriginalUserAgent.includes('crios');
+
+/** If the app is running inside a Tauri desktop shell. */
+export const isTauri = typeof window !== 'undefined' && !!(window as any).__TAURI_INTERNALS__;

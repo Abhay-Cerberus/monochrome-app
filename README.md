@@ -107,6 +107,19 @@ For alternative instances, check [INSTANCES.md](INSTANCES.md).
 
 ---
 
+## Desktop Application
+
+Monochrome can now be run as a fully native desktop application using Tauri!
+
+1. **Install Prerequisites**: Make sure you have the [Rust toolchain](https://rustup.rs/) installed, along with your platform's native C++ Build Tools (e.g. MSVC on Windows).
+2. **Install Dependencies**: Run `npm install` to grab the frontend and Tauri dependencies.
+3. **Run in Dev Mode**: Run `npx tauri dev` to launch the app natively with hot-reloading.
+4. **Build Production App**: Run `npx tauri build` to generate an optimized standalone executable and installer for your OS, located in `src-tauri/target/release/bundle/`.
+
+The native desktop version seamlessly supports native OS media controls, System Tray integrations, and background playback via the "Close to Tray" setting.
+
+---
+
 ## Self-Hosting
 
 NOTE: Accounts will not work on self-hosted instances. Our Appwrite authentication system only allows authorized domains.
