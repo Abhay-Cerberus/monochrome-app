@@ -4,8 +4,10 @@ dist
 *.local
 .vite
 .claude
+
 # Docker
 .env
+
 # Neutralino
 .tmp/
 .vitest-attachments/
@@ -17,7 +19,24 @@ auth_storage/
 www
 neutralino.js
 package-lock.json
+
 # Direnv
 .envrc
+
 # vim
 .lazy.lua
+
+# Unused/Local Files
+Monochrome.c
+music-apis-and-dbs.md
+*.exe
+
+# Bun lockfiles (project uses npm)
+bun.lock
+bun.lockb
+
+# Cloudflare Wrangler local state
+.wrangler/
+
+# Gemini
+.gemini/
