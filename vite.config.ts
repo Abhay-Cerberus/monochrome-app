@@ -63,10 +63,11 @@ export default defineConfig((_options) => {
             exclude: ['pocketbase', '@ffmpeg/ffmpeg', '@ffmpeg/util'],
         },
         server: {
+            host: '127.0.0.1',
+            port: 5173,
+            strictPort: true,
             fs: {
                 allow: ['.', 'node_modules'],
-                // host: true,
-                // allowedHosts: ['<your_tailscale_hostname>'], // e.g. pi5.tailf5f622.ts.net
             },
         },
         // preview: {

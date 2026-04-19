@@ -1,18 +1,6 @@
 # Contributing to Monochrome
 
-Thank you for your interest in contributing to Monochrome! This guide will help you get started with development, understand our codebase, and follow our contribution workflow.
-
----
-
-## Table of Contents
-
-- [Development Setup](#development-setup)
-- [Code Quality](#code-quality)
-- [Project Structure](#project-structure)
-- [Before You Contribute](#before-you-contribute)
-- [Contributing Workflow](#contributing-workflow)
-- [Commit Message Guidelines](#commit-message-guidelines)
-- [Deployment](#deployment)
+Thank you for contributing! This guide will help you get started.
 
 ---
 
@@ -20,86 +8,65 @@ Thank you for your interest in contributing to Monochrome! This guide will help 
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (Version 22+ recommended)
-- [Bun](https://bun.sh/) (preferred) or [npm](https://www.npmjs.com/)
+- [Rust](https://rustup.rs/)
+- [Bun](https://bun.sh/) (preferred) or [Node.js](https://nodejs.org/) v22+
+- Platform C++ build tools:
+  - **Windows**: MSVC
+  - **macOS**: Xcode Command Line Tools
+  - **Linux**: `build-essential`
 
 ### Quick Start
 
-1. Fork the Repository
-
-2. clone the repository:
-
-    ```bash
-    git clone https://github.com/YOUR_USERNAME/monochrome.git
-    cd monochrome
-    ```
-
-3. Install dependencies:
-
-    ```bash
-    bun install
-    # or
-    npm install
-    ```
-
-4. Start the development server:
-
-    ```bash
-    bun run dev
-    # or
-    npm run dev
-    ```
-
-#### Desktop Development (Tauri)
-
-To run the app natively as a desktop application, ensure you have the [Rust toolchain](https://rustup.rs/) and your platform's native C++ Build Tools installed, then run:
-
 ```bash
-npx tauri dev
+git clone https://github.com/YOUR_USERNAME/monochrome.git
+cd monochrome
+bun install
 ```
 
-5. Open your browser:
-   Navigate to `http://localhost:5173/`
+### Development
+
+```bash
+# Run with hot-reload
+npx tauri dev
+
+# Run tests
+bun run test
+bun run test:watch
+
+# Check code quality
+bun run lint
+bun run format
+```
+
+### Build
+
+```bash
+# Desktop app
+npx tauri build
+
+# Web version (outputs to dist/)
+bun run build
+```
 
 ---
 
 ## Code Quality
 
-We maintain high code quality standards. All code must pass our linting checks before being merged.
-
-### Our Tool Stack
-
-| Tool                               | Purpose            | Files    |
-| ---------------------------------- | ------------------ | -------- |
-| [ESLint](https://eslint.org/)      | JavaScript linting | `*.js`   |
-| [Stylelint](https://stylelint.io/) | CSS linting        | `*.css`  |
-| [HTMLHint](https://htmlhint.com/)  | HTML validation    | `*.html` |
-| [Prettier](https://prettier.io/)   | Code formatting    | All      |
-
-### Available Commands
+All code must pass linting before merging.
 
 ```bash
-# Check everything (runs all linters)
+# Check everything
 bun run lint
 
-# Auto-format all code
+# Auto-format
 bun run format
 
-# Fix JavaScript issues automatically
-bun run lint:js -- --fix
-
-# Fix CSS issues automatically
-bun run lint:css -- --fix
-
-# Check HTML
-bun run lint:html
-
-# Check specific file types
-bun run lint:js
-bun run lint:css
+# Fix specific issues
+bun run lint:js -- --fix   # JavaScript
+bun run lint:css -- --fix  # CSS
 ```
 
-> ⚠️ **Important:** A GitHub Action automatically runs `bun run lint` on every push and pull request. Please ensure all checks pass before committing.
+**Note:** GitHub Actions automatically runs linting on all PRs.
 
 ---
 
@@ -107,29 +74,12 @@ bun run lint:css
 
 ```
 monochrome/
-├── 📁 js/                    # Application source code
-│   └── ...
-├── 📁 public/               # Static assets
-│   ├── assets/             # Images, icons, fonts
-│   ├── manifest.json       # PWA manifest
-│   └── instances.json      # API instances configuration (deprecated)
-├── 📄 index.html           # Application entry point
-├── 📄 vite.config.js       # Build and PWA configuration
-├── 📄 package.json         # Dependencies and scripts
-└── 📄 README.md            # Project documentation
+├── js/              # Application source code
+├── src-tauri/       # Tauri desktop app config
+├── public/          # Static assets
+├── index.html       # Entry point
+└── package.json     # Dependencies & scripts
 ```
-
-### Key Directories
-
-- **`/js`** - All JavaScript source code
-    - Keep modules focused and single-purpose
-    - Use ES6+ features
-    - Keep the code easy to work with/maintain
-
-- **`/public`** - Static assets copied directly to build
-    - Images should be optimized before adding
-    - Keep file sizes reasonable
-    - Use appropriate formats (PNG where possible)
 
 ---
 
@@ -179,166 +129,75 @@ In short: we don't hate you, and we aren't trying to be mean. We know how much w
 
 ---
 
-## Contributing Workflow
+## Before Contributing
 
-### 1. Create a Branch
+### Discuss Large Changes
 
-```bash
-git checkout -b feature/your-feature-name
-# or
-git checkout -b fix/description-of-fix
-```
+Open a [GitHub Issue](https://github.com/monochrome-music/monochrome/issues) or ask on [Discord](https://monochrome.tf/discord) before starting major work to avoid duplicate effort.
 
-### 2. Make Your Changes
+### Open Draft PRs Early
 
-- Follow existing code style
-- Write clear, self-documenting code
-- Add comments for complex logic
-- Update documentation if needed
+Submit draft PRs early to catch issues before investing too much time.
 
-### 3. Test Your Changes
+### AI Code Policy
 
-```bash
-# Run all linters
-bun run lint
+AI is allowed as a tool (tutoring, cleanup, understanding code). Not allowed: Vibecoding entire PRs, submitting code you don't understand, or ignoring edge cases.
 
-# Test the build
-bun run build
-```
+If we detect unvetted AI work, the PR will be automatically closed. Explain your code clearly.
 
-### 4. Commit Your Changes
+---
 
-Follow our [commit message guidelines](#commit-message-guidelines).
+## Contribution Workflow
 
-```bash
-git add .
-git commit -m "feat(player): add keyboard shortcut for loop toggle" # example commit message
-```
-
-### 5. Push and Create a Pull Request
-
-```bash
-git push origin feature/your-feature-name
-```
-
-Then open a pull request on GitHub with:
-
-- Clear title describing the change
-- Detailed description of what changed and why
-- Reference any related issues
+1. Create a branch: `git checkout -b feature/name` or `fix/description`
+2. Make changes, follow code style
+3. Run `bun run lint` and `bun run test`
+4. Commit with conventional commit message
+5. Push and open a Pull Request
 
 ---
 
 ## Commit Message Guidelines
 
-We use [Conventional Commits](https://www.conventionalcommits.org/) for clear, structured commit messages.
-
-### Format
+Use [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
 <type>(<scope>): <description>
-
-[optional body]
-
-[optional footer]
 ```
 
-### Types
+**Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
 
-| Type       | Description                                       |
-| ---------- | ------------------------------------------------- |
-| `feat`     | New feature                                       |
-| `fix`      | Bug fix                                           |
-| `docs`     | Documentation changes                             |
-| `style`    | Code style changes (formatting, semicolons, etc.) |
-| `refactor` | Code refactoring without changing behavior        |
-| `perf`     | Performance improvements                          |
-| `test`     | Adding or updating tests                          |
-| `chore`    | Maintenance tasks (dependencies, build, etc.)     |
+**Scopes:** `player`, `ui`, `api`, `library`, `playlists`, `lyrics`, `auth`, `settings`, `theme`, etc.
 
-### Scopes
-
-Common scopes in our project:
-
-- `player` - Audio player functionality
-- `ui` - User interface components
-- `api` - API integration
-- `library` - Library management
-- `playlists` - Playlist functionality
-- `lyrics` - Lyrics display
-- `downloads` - Download functionality
-- `auth` - Authentication
-- `pwa` - Progressive Web App features
-- `settings` - Settings/preferences
-- `theme` - Theming system
-
-### Examples
-
-```bash
-# Feature addition
-feat(playlists): add shuffle playlist button
-
-# Bug fix
-fix(metadata): resolve corrupted Hi-res metadata issue
-
-# Refactoring
-refactor(downloads): simplify cancel download logic
-
-# Documentation
-docs(README): improve installation instructions
-
-# Maintenance
-chore(deps): bump lyrics package to fix vulnerability
-
-# Style changes
-style(player): fix indentation in audio controls
+**Examples:**
+```
+feat(playlists): add shuffle button
+fix(player): resolve audio cutoff
+docs(README): add build instructions
+refactor(api): simplify response handling
 ```
 
-### Tips
-
-- Use the present tense ("add feature" not "added feature")
-- Use imperative mood ("move cursor to..." not "moves cursor to...")
-- Don't capitalize the first letter
-- No period at the end
-- Keep the first line under 72 characters
-
-📋 **Cheat Sheet:** [Conventional Commits Cheat Sheet](https://gist.github.com/Zekfad/f51cb06ac76e2457f11c80ed705c95a3)
+Use present tense, lowercase, no period. Keep first line under 72 characters.
 
 ---
 
 ## Deployment
 
-Deployment is fully automated via **Cloudflare Pages**.
-
-### How It Works
-
-1. Push changes to the `main` branch
-2. Cloudflare automatically builds and deploys
-3. Changes are live a minute
-
-### Configuration Notes
-
-The project uses a **relative base path** (`./`) in `vite.config.js`. This allows the same build artifact to work on both:
-
-- **Cloudflare Pages** (served from root)
-- **GitHub Pages** (served from `/monochrome/`)
-
-Hash routing is used to ensure compatibility across all hosting platforms.
-
-### Manual Deployment
-
-If you need to deploy manually:
+### Desktop App
 
 ```bash
-# Build for production (Web/PWA)
-bun run build
-
-# Build for production (Native Desktop)
 npx tauri build
-
-# The `dist/` folder contains the deployable Web files
-# The `src-tauri/target/release/bundle/` folder contains the Desktop installer
+# Output: src-tauri/target/release/bundle/
 ```
+
+### Web Version
+
+```bash
+bun run build
+# Output: dist/
+```
+
+Deployment automation runs on `main` branch pushes (Cloudflare Pages for web).
 
 ---
 

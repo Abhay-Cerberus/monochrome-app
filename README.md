@@ -20,14 +20,14 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/monochrome-music/monochrome/stargazers">
-    <img src="https://img.shields.io/github/stars/monochrome-music/monochrome?style=for-the-badge&color=ffffff&labelColor=000000" alt="GitHub stars">
+  <a href="https://github.com/Abhay-Cerberus/monochrome-app/stargazers">
+    <img src="https://img.shields.io/github/stars/Abhay-Cerberus/monochrome-app?style=for-the-badge&color=ffffff&labelColor=000000" alt="GitHub stars">
   </a>
-  <a href="https://github.com/monochrome-music/monochrome/forks">
-    <img src="https://img.shields.io/github/forks/monochrome-music/monochrome?style=for-the-badge&color=ffffff&labelColor=000000" alt="GitHub forks">
+  <a href="https://github.com/Abhay-Cerberus/monochrome-app/forks">
+    <img src="https://img.shields.io/github/forks/Abhay-Cerberus/monochrome-app?style=for-the-badge&color=ffffff&labelColor=000000" alt="GitHub forks">
   </a>
-  <a href="https://github.com/monochrome-music/monochrome/issues">
-    <img src="https://img.shields.io/github/issues/monochrome-music/monochrome?style=for-the-badge&color=ffffff&labelColor=000000" alt="GitHub issues">
+  <a href="https://github.com/Abhay-Cerberus/monochrome-app/issues">
+    <img src="https://img.shields.io/github/issues/Abhay-Cerberus/monochrome-app?style=for-the-badge&color=ffffff&labelColor=000000" alt="GitHub issues">
   </a>
 </p>
 
@@ -39,7 +39,7 @@
 
 [![Monochrome UI: NASIR by Nas](https://i.samidy.xyz/NASIR.png)](https://monochrome.tf/album/90502209)
 
-## [![Monochrome UI: Jump Out by Osamason](https://i.samidy.xyz/jumpout.png)](https://monochrome.tf/album/413189044)
+[![Monochrome UI: Jump Out by Osamason](https://i.samidy.xyz/jumpout.png)](https://monochrome.tf/album/413189044)
 
 ## Features
 
@@ -58,6 +58,7 @@
 - Accurate and unique audio visualizer
 - Offline-capable Progressive Web App (PWA)
 - Media Session API integration for system controls
+- **Native Desktop App** via Tauri (Windows, macOS, Linux) with System Tray support
 
 ### Library & Organization
 
@@ -95,107 +96,78 @@
 
 ---
 
-## Quick Start
+## Getting Started
 
-### Live Instance
+### Prerequisites
 
-Our Recommended way to use monochrome is through our official instance:
+- [Rust](https://rustup.rs/) (Tauri requirement)
+- [Bun](https://bun.sh/) (preferred) or [Node.js](https://nodejs.org/) v20+
+- Platform-specific C++ build tools:
+  - **Windows**: MSVC (included with Visual Studio)
+  - **macOS**: Xcode Command Line Tools
+  - **Linux**: `build-essential` and other dev packages
 
-**[monochrome.tf](https://monochrome.tf)** / **[monochrome.samidy.com](https://monochrome.samidy.com)**
-
-For alternative instances, check [INSTANCES.md](INSTANCES.md).
-
----
-
-## Desktop Application
-
-Monochrome can now be run as a fully native desktop application using Tauri!
-
-1. **Install Prerequisites**: Make sure you have the [Rust toolchain](https://rustup.rs/) installed, along with your platform's native C++ Build Tools (e.g. MSVC on Windows).
-2. **Install Dependencies**: Run `npm install` to grab the frontend and Tauri dependencies.
-3. **Run in Dev Mode**: Run `npx tauri dev` to launch the app natively with hot-reloading.
-4. **Build Production App**: Run `npx tauri build` to generate an optimized standalone executable and installer for your OS, located in `src-tauri/target/release/bundle/`.
-
-The native desktop version seamlessly supports native OS media controls, System Tray integrations, and background playback via the "Close to Tray" setting.
-
----
-
-## Self-Hosting
-
-NOTE: Accounts will not work on self-hosted instances. Our Appwrite authentication system only allows authorized domains.
-
-We had to heavily customize the authentication system and write several custom scripts to support features like SMTP and Google OAuth (which are currently bugged in Appwrite). Because of this, we can no longer provide a self-hostable accounts system.
-
-### Option 1: Docker (Recommended)
+### Development
 
 ```bash
-git clone https://github.com/monochrome-music/monochrome.git
+git clone https://github.com/Abhay-Cerberus/monochrome-app.git
 cd monochrome
-docker compose up -d
+bun install  # Install dependencies
+
+# Run the app with hot-reload
+npx tauri dev
 ```
 
-Visit `http://localhost:3000`
-
-### Tailscale Access
-
-Visit `http://<tailscale_server_hostname_or_ip>:3000`
-
-By default, the app uses Vite preview, which restricts access to localhost.  
-To allow access over Tailscale:
-
-1. Open `vite.config.js`
-
-2. Uncomment and configure the `preview` section:
-
-```js
-preview: {
-    host: true,
-    allowedHosts: ['<your_tailscale_hostname>'], // e.g. pi5.tailf5f622.ts.net
-},
-```
-
-3. Restart with a fresh container (if already running):
+### Build for Production
 
 ```bash
-docker compose down
-docker compose up -d
+npx tauri build
+# Output: src-tauri/target/release/bundle/
 ```
 
-For development mode and advanced setups, see [DOCKER.md](DOCKER.md).
+Supports Windows (NSIS installer + portable), macOS (DMG), and Linux (AppImage, Deb).
 
-### Option 2: Manual Installation
+### Web Development
 
-#### Prerequisites
+For web-based development without Tauri:
 
-- [Bun](https://bun.sh/) (Preferred) or [Node.js](https://nodejs.org/) (Version 20+ or 22+ recommended)
+```bash
+bun run dev        # Dev server on localhost:5173
+bun run build      # Build web version
+bun run preview    # Preview built version
+```
 
-#### Local Development
+---
 
-1. **Clone the repository:**
+## Testing
 
-    ```bash
-    git clone https://github.com/monochrome-music/monochrome.git
-    cd monochrome
-    ```
+```bash
+bun run test          # Run tests
+bun run test:watch    # Watch mode
+bun run test:headless # Headless mode
+```
 
-2. **Install dependencies:**
+## Code Quality
 
-    ```bash
-    bun install
-    # or
-    npm install # NPM is included with Node.js
-    ```
+```bash
+bun run lint       # Check all (ESLint, Stylelint, HTMLHint)
+bun run format     # Auto-format code
+bun run lint:js -- --fix   # Fix JS issues
+bun run lint:css -- --fix  # Fix CSS issues
+```
 
-3. **Start the development server:**
+## Self-Hosting (Web Version)
 
-    ```bash
-    bun run dev
-    # or
-    npm run dev
-    ```
+Monochrome can be deployed as a web app via Docker. See [DOCKER.md](DOCKER.md) for configuration.
 
-4. **Open your browser:**
-   Navigate to `http://localhost:5173/`
+**⚠️ Note:** Accounts/authentication only work on official instances. Self-hosted instances require Appwrite setup.
+
+## Online Instances
+
+- **[monochrome.tf](https://monochrome.tf)** (Official)
+- **[monochrome.samidy.com](https://monochrome.samidy.com)** (Official mirror)
+
+See [INSTANCES.md](INSTANCES.md) for community instances.
 
 #### Building for Production
 

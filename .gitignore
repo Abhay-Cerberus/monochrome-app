@@ -40,3 +40,6 @@ bun.lockb
 
 # Gemini
 .gemini/
+
+# Build Files
+src-tauri/target/*
