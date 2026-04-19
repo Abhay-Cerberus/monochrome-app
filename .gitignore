@@ -1,4 +1,4 @@
-node_modules
+node_modules/
 dist
 .DS_Store
 *.local
@@ -31,7 +31,7 @@ Monochrome.c
 music-apis-and-dbs.md
 *.exe
 
-# Bun lockfiles (project uses npm)
+# Bun files (project uses npm)
 bun.lock
 bun.lockb
 
