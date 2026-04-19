@@ -44,14 +44,13 @@ bun run format
 # Desktop app (Tauri)
 npx tauri build
 
-# Android app (Capacitor)
-bun run build          # Build web first
-bunx capacitor sync android
-npx capacitor open android
-# Then build APK in Android Studio
+# Android app (Capacitor) - requires Java 21 LTS
+bun run build                   # Build web first
+bunx capacitor sync android     # Sync to Android
+# Open android/ folder in Android Studio: Build > Build APK(s)
 
-# Web version (outputs to dist/)
-bun run build
+# Web version
+bun run build  # Output: dist/
 ```
 
 ---
@@ -199,12 +198,15 @@ npx tauri build
 
 ### Android App (Capacitor)
 
+**Prerequisites:** Java 21 LTS (not Java 25+)
+
 ```bash
-bun run build
-bunx capacitor sync android
-npx capacitor open android
-# Build APK in Android Studio: Build > Build APK(s)
-# Output: android/app/build/outputs/apk/
+bun run build                    # Build web version
+bunx capacitor sync android      # Sync to Android
+
+# Then open android/ folder in Android Studio:
+# Build > Build APK(s)
+# Output: android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
 ### Web Version

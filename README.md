@@ -139,7 +139,11 @@ bun run preview    # Preview built version
 
 ### Android App
 
-Requires [Android Studio](https://developer.android.com/studio) and Android SDK.
+**Prerequisites:**
+- [Java 21 LTS](https://www.oracle.com/java/technologies/downloads/#java21) (required - NOT Java 25+)
+- [Android Studio](https://developer.android.com/studio) (includes Android SDK)
+
+**Build APK:**
 
 ```bash
 # 1. Build web version
@@ -148,11 +152,18 @@ bun run build
 # 2. Sync to Android
 bunx capacitor sync android
 
-# 3. Open in Android Studio
-npx capacitor open android
+# 3. Build with Android Studio GUI (easiest)
+# Open: android/ folder in Android Studio
+# Then: Build → Build APK(s)
+# Output: android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Then in Android Studio: **Build** → **Build APK(s)** → APK generated to `android/app/build/outputs/apk/`
+**Or build from command line:**
+```bash
+cd android
+$env:JAVA_HOME="C:\path\to\java21"  # Set Java 21 path
+.\gradlew.bat build
+```
 
 ## Testing
 
