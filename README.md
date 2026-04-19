@@ -137,7 +137,22 @@ bun run build      # Build web version
 bun run preview    # Preview built version
 ```
 
----
+### Android App
+
+Requires [Android Studio](https://developer.android.com/studio) and Android SDK.
+
+```bash
+# 1. Build web version
+bun run build
+
+# 2. Sync to Android
+bunx capacitor sync android
+
+# 3. Open in Android Studio
+npx capacitor open android
+```
+
+Then in Android Studio: **Build** → **Build APK(s)** → APK generated to `android/app/build/outputs/apk/`
 
 ## Testing
 

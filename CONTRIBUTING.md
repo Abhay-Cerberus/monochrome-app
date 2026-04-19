@@ -41,8 +41,14 @@ bun run format
 ### Build
 
 ```bash
-# Desktop app
+# Desktop app (Tauri)
 npx tauri build
+
+# Android app (Capacitor)
+bun run build          # Build web first
+bunx capacitor sync android
+npx capacitor open android
+# Then build APK in Android Studio
 
 # Web version (outputs to dist/)
 bun run build
@@ -183,11 +189,22 @@ Use present tense, lowercase, no period. Keep first line under 72 characters.
 
 ## Deployment
 
-### Desktop App
+### Desktop App (Tauri)
 
 ```bash
 npx tauri build
 # Output: src-tauri/target/release/bundle/
+# Supports: Windows (NSIS), macOS (DMG), Linux (AppImage, Deb)
+```
+
+### Android App (Capacitor)
+
+```bash
+bun run build
+bunx capacitor sync android
+npx capacitor open android
+# Build APK in Android Studio: Build > Build APK(s)
+# Output: android/app/build/outputs/apk/
 ```
 
 ### Web Version
@@ -197,7 +214,7 @@ bun run build
 # Output: dist/
 ```
 
-Deployment automation runs on `main` branch pushes (Cloudflare Pages for web).
+Automated deployment runs on `main` branch pushes (Cloudflare Pages for web).
 
 ---
 
